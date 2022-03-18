@@ -10,29 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_04_175505) do
+ActiveRecord::Schema.define(version: 2022_03_07_173340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "accounts", force: :cascade do |t|
+    t.string "business_name"
+    t.string "address"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "reservations", force: :cascade do |t|
-    t.bigint "room_id", null: false
     t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
     t.string "start_date"
     t.string "end_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["room_id"], name: "index_reservations_on_room_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
-  end
-
-  create_table "reviews", force: :cascade do |t|
-    t.string "description"
-    t.integer "rating"
-    t.bigint "reservation_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["reservation_id"], name: "index_reviews_on_reservation_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -42,6 +40,7 @@ ActiveRecord::Schema.define(version: 2022_03_04_175505) do
     t.string "amenities"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image_url"
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,9 +48,13 @@ ActiveRecord::Schema.define(version: 2022_03_04_175505) do
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "account_id"
+    t.string "username"
+    t.string "password_digest"
+    t.index ["account_id"], name: "index_users_on_account_id"
   end
 
   add_foreign_key "reservations", "rooms"
   add_foreign_key "reservations", "users"
-  add_foreign_key "reviews", "reservations"
+  add_foreign_key "users", "accounts"
 end
