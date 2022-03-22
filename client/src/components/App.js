@@ -37,8 +37,8 @@ function App() {
   }
 
   function onUpdateUser(reservation){
-    console.log(reservation)
-    setUser({...user, reservations: [...user.reservations, reservation]})
+    //POSSIBLE TO USE .SORT() SO MY RES PAGE DOESN'T HAVE TO WAIT FOR REFRESH TO BE IN ORDER
+    setUser({...user, reservations: [reservation, ...user.reservations]})
   }
 
   function onDeleteReservation(reservation){
