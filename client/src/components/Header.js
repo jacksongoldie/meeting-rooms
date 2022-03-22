@@ -11,7 +11,7 @@ const Header = ({ onSetTabs }) => {
   }
 
   return (
-    <div style={{ paddingBottom: '2vh'}}>
+    <div style={{ paddingBottom: '1.5vh'}}>
       <Typography
       variant='h2'
       component='h1'
