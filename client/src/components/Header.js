@@ -11,12 +11,12 @@ const Header = ({ onSetTabs }) => {
   }
 
   return (
-    <div>
+    <div style={{ paddingBottom: '2vh'}}>
       <Typography
       variant='h2'
       component='h1'
       align='left'
-      color='textPrimary'
+      color='text'
       onClick={handleClick}
       >
       Meeting Rooms</Typography></div>
