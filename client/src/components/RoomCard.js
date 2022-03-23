@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import ReservationForm from './ReservationForm';
-import { Grid, makeStyles, Paper } from '@material-ui/core';
+import { makeStyles, Card, CardContent, CardMedia } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-      padding: theme.spacing(2),
+      padding: theme.spacing(4),
+      margin: theme.spacing(4),
       textAlign: 'center',
-      color: theme.palette.text.secondary,
+      alignContent: 'center',
+      color: theme.palette.text.secondary
     }
   }));
 
@@ -39,21 +41,29 @@ function RoomCard({ room, user, onUpdateUser, onSetTabs }) {
 
     return (
         <div>
-                <Grid item m>
-                <Paper className={classes.paper}>
-                    <img src={room.image_url} alt="conference room" style={{ height: '300px'}} />
+            <Card className={classes.paper}>
+                <CardContent>
+                  <CardMedia
+                  component="img"
+                  width="200px"
+                  height='600px'
+                  image={room.image_url}
+                  alt="conference room"
+                  />
                     <h2>{room.name} #{room.number}</h2>
-                    <button onClick={createReservation}>Reserve Room</button>
                     {
                         showForm ? 
-                        <ReservationForm user={user} room={room} setShowForm={setShowForm} onUpdateUser={onUpdateUser} onSetConfirmation={onSetConfirmation} /> :
-                        null
+                        <>
+                        <button onClick={(mUV) => setShowForm(!mUV)}>Go Back</button>
+                        <ReservationForm user={user} room={room} setShowForm={setShowForm} onUpdateUser={onUpdateUser} onSetConfirmation={onSetConfirmation} />
+                        </> :
+                        <button onClick={createReservation}>Reserve Room</button>
                     }
                      {confirmation !== '' ? <p style={{ fontWeight: 'bold', fontStyle:'italic' }}>{confirmation}</p> : null}
                     <p>{room.description}</p>
                     <p>Amenities: {room.amenities}</p>
-                </Paper>
-            </Grid>
+                </CardContent>
+                </Card>
         </div>
     )
 }
