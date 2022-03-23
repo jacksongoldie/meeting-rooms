@@ -1,11 +1,11 @@
 import Login from "../auth/Login";
 import ReservationCard from "./ReservationCard";
 
-function ReservationsContainer({ user, onSetUser, onDeleteReservation, onSetTabs }) {
-    console.log(user)
-    //console.log(user.reservations)
+function ReservationsContainer({ user, onSetUser, onDeleteReservation, onSetTabs, onUpdateUser }) {
+    //console.log(user)
     //CANNOT FIGURE OUT WHY IT IS READING THIS VARIABLE WHEN USER IS NULL???
     // const reservationCards = user.reservations.map((r) => <ReservationCard key={r.id} reservation={r} />)
+    //LEFT OFF HERE TO SORT USER.RES
     
     return (
         <div>
@@ -13,7 +13,7 @@ function ReservationsContainer({ user, onSetUser, onDeleteReservation, onSetTabs
                 user ?
                 <>
                 <h2>{user.name}'s Upcoming Reservations</h2>
-                {user.reservations.map((r) => <ReservationCard key={r.id} reservation={r} onDeleteReservation={onDeleteReservation} />)} 
+                {user.reservations.map((r) => <ReservationCard key={r.id} reservation={r} onDeleteReservation={onDeleteReservation} user={user} onUpdateUser={onUpdateUser} />)} 
                 </> :
                 <>
                 <h3>Must be logged in to view reservations.</h3>
