@@ -1,7 +1,23 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import { TextField, Button, Select, Paper, FormControl, InputLabel, Box, MenuItem, Typography } from '@mui/material';
+import { makeStyles } from '@material-ui/core'
+
+const useStyles = makeStyles((theme) => ({
+    paper: {
+      padding: theme.spacing(2),
+      display: 'inline-block'
+    },
+    text: {
+        width: '100%'
+    },
+    button: {
+        width: '50%'
+    }
+  }));
 
 function Signup({ accounts }) {
     
+    const classes = useStyles();
     const blankForm = {
         name: "",
         email: "",
@@ -43,57 +59,76 @@ function Signup({ accounts }) {
         
     }
 
-    const accountOptions = accounts.map((c) => <option key={c.id} value={c.id}>{c.business_name}</option>)
+    const accountOptions = accounts.map((c) => <MenuItem key={c.id} value={c.id}>{c.business_name}</MenuItem>)
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label>Name:</label>
-                <input 
+        <div style={{ display: 'flex', justifyContent: 'center'}}>
+            <form onSubmit={handleSubmit} style={{ width: '80%'}}>
+                <Paper className={classes.paper}>
+                <Box textAlign='center'>
+                <TextField
+                    margin='dense'
+                    className={classes.text}
+                    label='Name:'
                     type="text" 
                     name='name' 
                     value={formData.name} 
                     onChange={handleChange}
+                    required
                 />
-                <br />
-                <label>Email:</label>
-                <input 
+                <TextField 
+                    margin='dense'
+                    className={classes.text}
+                    label='Email:'
                     type="text" 
                     name='email' 
                     value={formData.email} 
                     onChange={handleChange}
+                    required
                 />
-                <br />
-                <label>Company:</label>
-                <select 
-                    name="account_id" value={formData.account_id} onChange={handleChange} required 
+                <FormControl 
+                    required
+                    className={classes.text}
+                    margin='dense'>
+                <InputLabel>Company:</InputLabel>
+                <Select
+                    margin='dense'
+                    label="Company:"
+                    name="account_id" 
+                    value={formData.account_id} 
+                    onChange={handleChange} 
+                    required 
                 >
-                    <option 
-                    value=""
-                    hidden >
-                        Select...
-                    </option>
                     {accountOptions}
-                </select>
-                <br />
-                <label>Username:</label>
-                <input 
+                </Select>
+                </FormControl>
+                <TextField
+                    className={classes.text}
+                    margin='dense'
+                    label="Username:"
                     type="text" 
                     name='username' 
                     value={formData.username} 
                     onChange={handleChange}
+                    required
                 />
-                <br />
-                <label>Password:</label>
-                <input 
+                <TextField
+                    margin='dense'
+                    className={classes.text}
+                    label="Password:"
                     type="text" 
                     name='password' 
                     value={formData.password} 
                     onChange={handleChange}
+                    required
                 />
-                <br />
-                <button>Submit</button>
-                {errors.length > 0 ? errors.map((err) => <ul><li>{err}</li></ul>) : null }
+                {errors.length > 0 ? errors.map((err) => <Typography style={{ margin: '1vh' }}>{err}</Typography>) : null }
+                <Button
+                variant='contained'
+                type='submit'
+                className={classes.button}>Submit</Button>
+                </Box>
+                </Paper>
             </form>
         </div>
     )

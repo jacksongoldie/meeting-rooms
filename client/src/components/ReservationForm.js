@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import DatePicker from "react-datepicker";
+import { FormControl, Button } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
 import "react-datepicker/dist/react-datepicker.css";
 
 function ReservationForm({ user, room, setShowForm, onUpdateUser, onSetConfirmation }) {
-
-    const [startDate, setStartDate] = useState(null);
+    const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState(null);
     const [errors, setErrors] = useState([]);
 
-    function handleDateSubmit(e, startDate, endDate){
+    function handleDateSubmit(e){
         e.preventDefault();
 
         const reservation = {
@@ -40,6 +41,7 @@ function ReservationForm({ user, room, setShowForm, onUpdateUser, onSetConfirmat
                 }
                 else{
                     r.json().then((r) => {
+                        console.log(r)
                         setErrors(r.errors)
                     })
                 } 
@@ -49,17 +51,35 @@ function ReservationForm({ user, room, setShowForm, onUpdateUser, onSetConfirmat
     
 
     return (
-        <div>
-            <div>
-                <form onSubmit={(e) => handleDateSubmit(e, startDate, endDate)}>
-                <p>Select start date:</p>
-                <DatePicker selected={startDate} onChange={(date:Date) => {setStartDate(date)}}/>
-                <p>Select end date:</p>
-                <DatePicker selected={endDate} onChange={(date:Date) => setEndDate(date)}/>
-                <button type="submit">Submit Reservation</button>
-                {errors.length > 0 ? errors.map((err) => <p style={{ fontStyle: 'italic' }}>{err}</p>) : null}
-                </form>
-            </div>
+        <div style={{ marginTop: "1vh" }}>
+            <FormControl onSubmit={handleDateSubmit} >
+            <Stack component="form" noValidate spacing={3}>
+                <TextField
+                    id="start_date"
+                    label="Start Date"
+                    type="date"
+                    onChange={(e) => setStartDate(e.target.value)}
+                    defaultValue={startDate}
+                    sx={{ width: 290 }}
+                    InputLabelProps={{
+                    shrink: true,
+                    }}
+                />
+                <TextField
+                    id="end_date"
+                    label="End Date"
+                    type="date"
+                    onChange={(e) => setEndDate(e.target.value)}
+                    defaultValue={endDate}
+                    sx={{ width: 290 }}
+                    InputLabelProps={{
+                    shrink: true,
+                    }}
+                />
+                <Button type="submit">Submit Reservation</Button>
+                {errors ? errors.map((err) => <p style={{ fontStyle: 'italic', fontWeight: 'bold', width: 220, textAlign: 'left' }}>{err}</p>) : null}
+            </Stack>
+            </FormControl>
         </div>
     )
 }

@@ -1,9 +1,25 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { TextField, Button, Paper } from '@mui/material';
+import { makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+    paper: {
+      padding: theme.spacing(2),
+      display: 'inline-block'
+    },
+    text: {
+        width: '100%'
+    },
+    button: {
+        width: '50%'
+    }
+  }));
 
 function Login({ onSetUser, onSetTabs, tab }) {
 
     const navigate = useNavigate();
+    const classes = useStyles();
 
     const blankLogin = {
         username: "",
@@ -47,27 +63,31 @@ function Login({ onSetUser, onSetTabs, tab }) {
 }
 
     return (
-        <div>
+        <div style={{ diplay: 'flex', justifyContents: 'center', textAlign: 'center' }}>
+            <Paper className={classes.paper}>
             <form onSubmit={handleSubmit}>
-                <label>Username:</label>
-                <input 
+                <TextField
+                margin='normal'
+                className={classes.text}
+                label='Username'
                 type="text"
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
                 />
-                <br />
-                <label>Password:</label>
-                <input 
+                <TextField
+                margin='normal'
+                className={classes.text}
+                label='Password'
                 type="text"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
                 />
-                <br />
-                <button type="submit">Submit</button>
+                <Button className={classes.button} variant='contained' type="submit">Submit</Button>
                 <p>{errors}</p>
             </form>
+            </Paper>
         </div>
     )
 }

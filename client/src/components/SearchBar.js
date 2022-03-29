@@ -1,4 +1,4 @@
-
+import { FormControl, TextField, Button } from '@mui/material';
 
 function SearchBar({ handleSearch, handleChange, searchValue }) {
 
@@ -10,15 +10,16 @@ function SearchBar({ handleSearch, handleChange, searchValue }) {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <input 
+            <FormControl onSubmit={handleSubmit}>
+                <TextField
+                margin='normal'
                 type="text" 
                 value={searchValue}
                 placeholder='Search...'
                 onChange={handleChange}
                 />
-                <button type="submit">Search</button>
-            </form>
+                <Button variant='contained' type="submit">Search</Button>
+            </FormControl>
         </div>
     )
 }
