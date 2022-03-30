@@ -25,7 +25,6 @@ function App() {
             .then((u) => setUser(u))
         }
         else{
-          //SET ERRORS
             setUser(null)
         }
     })
@@ -37,8 +36,19 @@ function App() {
   }
 
   function onUpdateUser(reservation){
-    //POSSIBLE TO USE .SORT() SO MY RES PAGE DOESN'T HAVE TO WAIT FOR REFRESH TO BE IN ORDER
     setUser({...user, reservations: [reservation, ...user.reservations]})
+  } 
+
+  function onUpdateReservation(reservation){
+    const reservations = user.reservations.map((r) => {
+      if(r.id === reservation.id){
+        return reservation
+      }
+      else{
+        return r
+      }
+      })
+      setUser({...user, reservations: reservations})
   }
 
   function onDeleteReservation(reservation){
@@ -62,7 +72,7 @@ function App() {
       <Container maxWidth="xl" style={{ marginTop: '5vh' }}>
       <Routes>
         <Route path='/' element={<Home user={user} onSetUser={onSetUser} onSetTabs={onSetTabs} onUpdateUser={onUpdateUser} />} />
-        <Route path='/myreservations' element={<ReservationsContainer user={user} onSetUser={onSetUser} onDeleteReservation={onDeleteReservation} onSetTabs={onSetTabs} />} />
+        <Route path='/myreservations' element={<ReservationsContainer user={user} onSetUser={onSetUser} onUpdateUser={onUpdateUser} onDeleteReservation={onDeleteReservation} onUpdateReservation={onUpdateReservation} onSetTabs={onSetTabs} />} />
         <Route path='/signup' element={<Signup accounts={accounts} />} />
         <Route path='/login' element={<Login onSetUser={onSetUser} onSetTabs={onSetTabs} tab={'/'}/>} />
         <Route path='/logout' element={<Home user={user} onSetUser={onSetUser} />} />

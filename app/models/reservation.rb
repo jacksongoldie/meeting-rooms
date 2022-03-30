@@ -41,35 +41,24 @@ class Reservation < ApplicationRecord
 
   def dates_available
     #byebug
+    id ? 
+    reservations = Reservation.where(["room_id =?", room_id]).where("id !=?", id) :
     reservations = Reservation.where(["room_id =?", room_id])
-    reservation_range = (Date.parse(start_date)..Date.parse(end_date)).to_a
+    
+    reservation_range = ((start_date)..(end_date)).to_a
     full_reservations_array = []
 
-    reservations.each {|res| full_reservations_array << (Date.parse(res.start_date)..Date.parse(res.end_date)).to_a}
+    reservations.each {|res| full_reservations_array << ((res.start_date)..(res.end_date)).to_a}
 
+    masterDates = []
     full_reservations_array.each do |range|
-      #byebug
-      current_test_range = []
       current_test_range = range & reservation_range
-      
-      if current_test_range.length > 0
-        #current_test_range_errors_dates = current_test_range.map {|date| "\u2022 #{Date.parse(date.to_s)} " }
-        #byebug
-        #CANNOT GET THE ERRORS TO PRINT USING EACH?? RETURNING AN ARRAY
-        # errors.add(:room_id, "#{Room.find(room_id).number} is currently booked for: #{current_test_range_errors_dates.each {|e| puts  "#{e}"}}")
-
-        
-        # def text
-        #   x=0
-        #   while x>= current_test_range.length
-        #     puts "#{current_test_range[x].to_s}"
-        #     x+=1
-        #   end
-        # end 
-        errors.add(:room_id, "#{Room.find(room_id).number} is currently booked for: #{current_test_range}")
-      end
+      current_test_range.each {|d| masterDates << Date.parse(d)}
     end
-
+    if masterDates.length > 0
+      string = masterDates.to_s
+      errors.add(:room_id, "#{Room.find(room_id).number} is currently booked for: #{string[1..-2]} ")
+    end
   end
 
   

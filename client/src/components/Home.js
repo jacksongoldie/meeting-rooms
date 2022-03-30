@@ -1,10 +1,16 @@
 import RoomsContainer from "./RoomsContainer";
 import SearchBar from "./SearchBar";
 import { useState, useEffect } from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography, Box, Paper, makeStyles } from '@material-ui/core';
 
-const Home = ({ user, onUpdateUser, onSetUser, onSetTabs }) => {
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    padding: theme.spacing(2)
+  }
+}));
 
+const Home = ({ user, onUpdateUser, onSetTabs }) => {
+    const classes = useStyles();
     const [rooms, setRooms] = useState([]);
     const [searchValue, setSearchValue] = useState('');
 
@@ -32,22 +38,31 @@ const Home = ({ user, onUpdateUser, onSetUser, onSetTabs }) => {
     }
 
   return (
-    <div style={{ alignContent: 'center' }}>
+    <div style={{ display: 'flex', justifyContent: 'center'}}>
+      <Box textAlign='center'>
+        <Box display='inline-block'>
+      <Paper className={classes.paper}>
         {user ? 
         <Typography
-        variant='h4'
+        variant='h6'
         component='h2'
         color='textSecondary'
         >Welcome, {user.name}!</Typography> :
-        <Typography
-        variant='h4'
-        component='h2'
-        color='textSecondary'
-        >Login to make your next reservation!</Typography>}
-        <div style={{ marginTop: '3vh', marginBottom: '3vh' }}>
+        null
+        // <Typography
+        // variant='h6'
+        // component='h2'
+        // color='textSecondary'
+        // >Login to make your next reservation!</Typography>}
+}
+        <div style={{ marginTop: '2vh', marginBottom: '2vh' }}>
         <SearchBar handleSearch={handleSearch} handleChange={handleChange} searchValue={searchValue} />
         </div>
+        </Paper>
+        </Box>
         <RoomsContainer rooms={roomsToDisplay()} user={user} onUpdateUser={onUpdateUser} onSetTabs={onSetTabs} />
+        </Box>
+
     </div>
   )
 }

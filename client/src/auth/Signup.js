@@ -116,7 +116,7 @@ function Signup({ accounts }) {
                     margin='dense'
                     className={classes.text}
                     label="Password:"
-                    type="text" 
+                    type="password" 
                     name='password' 
                     value={formData.password} 
                     onChange={handleChange}

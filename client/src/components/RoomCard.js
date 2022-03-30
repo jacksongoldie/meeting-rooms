@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ReservationForm from './ReservationForm';
-import { makeStyles, Card, CardContent, CardMedia } from '@material-ui/core';
+import { makeStyles, Card, CardContent, CardMedia, Button } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -54,10 +54,10 @@ function RoomCard({ room, user, onUpdateUser, onSetTabs }) {
                     {
                         showForm ? 
                         <>
-                        <button onClick={(mUV) => setShowForm(!mUV)}>Go Back</button>
+                        <Button onClick={(mUV) => setShowForm(!mUV)}>Go Back</Button>
                         <ReservationForm user={user} room={room} setShowForm={setShowForm} onUpdateUser={onUpdateUser} onSetConfirmation={onSetConfirmation} />
                         </> :
-                        <button onClick={createReservation}>Reserve Room</button>
+                        <Button onClick={createReservation}>Reserve Room</Button>
                     }
                      {confirmation !== '' ? <p style={{ fontWeight: 'bold', fontStyle:'italic' }}>{confirmation}</p> : null}
                     <p>{room.description}</p>

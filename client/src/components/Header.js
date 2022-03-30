@@ -16,7 +16,7 @@ const Header = ({ onSetTabs }) => {
       variant='h2'
       component='h1'
       align='left'
-      color='text'
+      color='initial'
       onClick={handleClick}
       >
       Meeting Rooms</Typography></div>

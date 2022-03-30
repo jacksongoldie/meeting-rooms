@@ -79,7 +79,7 @@ function Login({ onSetUser, onSetTabs, tab }) {
                 margin='normal'
                 className={classes.text}
                 label='Password'
-                type="text"
+                type="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
