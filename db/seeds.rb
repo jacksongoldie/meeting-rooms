@@ -7,14 +7,14 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 puts 'Seeding...'
-
+Reservation.destroy_all
 User.destroy_all
 Room.destroy_all
-Reservation.destroy_all
+Account.destroy_all
 
 #Accounts
-candles = Account.create(business_name: 'Candle Co.', address: '201 E. Park Ave.')
-blocks = = Account.create(business_name: 'Building BlocksRUs', address: '202 E. Park Ave.')
+Account.create(business_name: 'Candle Co.', address: '201 E. Park Ave.')
+Account.create(business_name: 'Building BlocksRUs', address: '202 E. Park Ave.')
 
 #Users
 goldie = User.create(name: 'Goldie Jackson', email: 'goldie@goldie.com', password: 'grj1987', account_id: Account.first.id)
