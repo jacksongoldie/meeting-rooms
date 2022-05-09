@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
+    before_action :set_user, only: [:show]
+
     def index
         render json: User.all
     end
 
     def show
-        user = User.find(session[:user_id])
-        render json: user, include: ['reservations', 'reservations.room']
+        render json: @user, include: ['reservations.room']
     end
 
     def create
