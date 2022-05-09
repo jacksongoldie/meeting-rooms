@@ -11,7 +11,6 @@ const useStyles = makeStyles(theme => ({
 
 function ReservationsContainer({ user, onSetUser, onDeleteReservation, onUpdateReservation, onSetTabs, onUpdateUser }) {
     const classes = useStyles();
-    console.log(user)
     //CANNOT FIGURE OUT WHY IT IS READING THIS VARIABLE WHEN USER IS NULL???
     // const reservationCards = user.reservations.map((r) => <ReservationCard key={r.id} reservation={r} />)
     //LEFT OFF HERE TO SORT USER.RES

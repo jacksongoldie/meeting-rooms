@@ -49,6 +49,7 @@ function Login({ onSetUser, onSetTabs, tab }) {
                 r.json()
                 .then((u) => {
                     onSetUser(u)
+                    console.log(u)
                     setFormData(blankLogin)
             })
             navigate(tab)

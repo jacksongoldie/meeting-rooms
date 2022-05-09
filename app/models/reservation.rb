@@ -55,6 +55,7 @@ class Reservation < ApplicationRecord
       current_test_range = range & reservation_range
       current_test_range.each {|d| masterDates << Date.parse(d)}
     end
+
     if masterDates.length > 0
       string = masterDates.to_s
       errors.add(:room_id, "#{Room.find(room_id).number} is currently booked for: #{string[1..-2]} ")

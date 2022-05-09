@@ -41,7 +41,6 @@ function ReservationForm({ user, room, setShowForm, onUpdateUser, onSetConfirmat
                 }
                 else{
                     r.json().then((r) => {
-                        console.log(r)
                         setErrors(r.errors)
                     })
                 } 

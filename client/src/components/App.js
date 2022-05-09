@@ -17,12 +17,13 @@ function App() {
     fetch('/accounts')
     .then(r => r.json())
     .then(setAccounts)
-    //FETCH VS STATE TO RENDER USER TERNARY - FIX IT
+    
     fetch('/me')
     .then(r => {
         if(r.ok){
             r.json()
-            .then((u) => setUser(u))
+            .then((u) => {setUser(u) 
+            })
         }
         else{
             setUser(null)
@@ -73,7 +74,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home user={user} onSetUser={onSetUser} onSetTabs={onSetTabs} onUpdateUser={onUpdateUser} />} />
         <Route path='/myreservations' element={<ReservationsContainer user={user} onSetUser={onSetUser} onUpdateUser={onUpdateUser} onDeleteReservation={onDeleteReservation} onUpdateReservation={onUpdateReservation} onSetTabs={onSetTabs} />} />
-        <Route path='/signup' element={<Signup accounts={accounts} />} />
+        <Route path='/signup' element={<Signup accounts={accounts} onSetUser={onSetUser} />} />
         <Route path='/login' element={<Login onSetUser={onSetUser} onSetTabs={onSetTabs} tab={'/'}/>} />
         <Route path='/logout' element={<Home user={user} onSetUser={onSetUser} />} />
       </Routes>

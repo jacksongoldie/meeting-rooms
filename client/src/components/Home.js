@@ -48,13 +48,7 @@ const Home = ({ user, onUpdateUser, onSetTabs }) => {
         component='h2'
         color='textSecondary'
         >Welcome, {user.name}!</Typography> :
-        null
-        // <Typography
-        // variant='h6'
-        // component='h2'
-        // color='textSecondary'
-        // >Login to make your next reservation!</Typography>}
-}
+        null}
         <div style={{ marginTop: '2vh', marginBottom: '2vh' }}>
         <SearchBar handleSearch={handleSearch} handleChange={handleChange} searchValue={searchValue} />
         </div>
