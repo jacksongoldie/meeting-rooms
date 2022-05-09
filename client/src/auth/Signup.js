@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { TextField, Button, Select, Paper, FormControl, InputLabel, Box, MenuItem, Typography } from '@mui/material';
 import { makeStyles } from '@material-ui/core'
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -15,7 +16,9 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-function Signup({ accounts }) {
+function Signup({ accounts, onSetUser }) {
+
+    let navigate = useNavigate()
     
     const classes = useStyles();
     const blankForm = {
@@ -48,6 +51,8 @@ function Signup({ accounts }) {
             if(r.ok){
                 r.json().then((user) => {
                     setFormData(blankForm)
+                    onSetUser(user)
+                    navigate(`/`)
                 })
             }
             else{
