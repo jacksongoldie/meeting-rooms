@@ -205,5 +205,3 @@ RUBY VERSION
 
 BUNDLED WITH
    2.3.8
-
-bundle lock --add-platform x86_64-linux
