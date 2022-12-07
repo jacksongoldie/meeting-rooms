@@ -1,5 +1,6 @@
 class ReservationsController < ApplicationController
-    
+    before_action :set_user, only: [:create, :update, :destroy]
+
     def index
         reservations = Reservation.all.order(start_date: :asc)
         render json: reservations, status: :ok
@@ -13,19 +14,27 @@ class ReservationsController < ApplicationController
         #changed from setting Reservation.create to user.reservations.create to try helping with validations
         # user = User.find(params[:user_id])
         # reservation = user.reservations.create!(reservation_params)
-        reservation = Reservation.create!(reservation_params)
+        reservation = @user.reservations.create!(reservation_params)
+        #reservation = Reservation.create!(reservation_params)
         render json: reservation, status: :created
     end
 
     def update
-        reservation.update!(reservation_params)
-        render json: reservation, status: :created
+        if @user.id == reservation.user.id
+            reservation.update!(reservation_params)
+            render json: reservation, status: :created
+        else
+            render json: { errors: "Not authorized"}, status: :unauthorized
+        end
     end
 
     def destroy
-        reservation.destroy
-        head :no_content
-        #redirect?
+        if @user.id == reservation.user.id
+            reservation.destroy
+            head :no_content
+        else
+            render json: { errors: "Not authorized"}, status: :unauthorized
+        end
     end
 
     private 
@@ -35,6 +44,6 @@ class ReservationsController < ApplicationController
     end
 
     def reservation_params
-        params.permit(:start_date, :end_date, :room_id, :user_id)
+        params.permit(:start_date, :end_date, :room_id)
     end
 end

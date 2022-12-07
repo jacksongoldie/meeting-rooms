@@ -13,7 +13,7 @@ function ReservationForm({ user, room, setShowForm, onUpdateUser, onSetConfirmat
         e.preventDefault();
 
         const reservation = {
-            user_id: user.id,
+            user_id: 21,
             room_id : room.id,
             start_date: startDate,
             end_date: endDate
