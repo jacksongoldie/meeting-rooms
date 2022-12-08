@@ -15,7 +15,7 @@ const Home = ({ user, onUpdateUser, onSetTabs }) => {
     const [searchValue, setSearchValue] = useState('');
 
     useEffect(() => {
-        fetch('/rooms')
+        fetch('https://meetingrooms.onrender.com/rooms')
         .then(r => r.json())
         .then(setRooms)
 

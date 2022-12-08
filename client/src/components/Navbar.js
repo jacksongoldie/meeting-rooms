@@ -26,7 +26,7 @@ function Navbar({ user, onSetUser, tabs, onSetTabs }) {
     const classes = useStyles();
 
     function handleClick(){
-        fetch('/logout', {
+        fetch('https://meetingrooms.onrender.com/logout', {
             method: 'DELETE'
         })
         .then(onSetUser(null))

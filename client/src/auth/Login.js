@@ -37,7 +37,7 @@ function Login({ onSetUser, onSetTabs, tab }) {
 
     function handleSubmit(e){
         e.preventDefault();
-        fetch('/login', {
+        fetch('https://meetingrooms.onrender.com/login', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

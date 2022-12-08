@@ -19,7 +19,7 @@ function ReservationForm({ user, room, setShowForm, onUpdateUser, onSetConfirmat
             end_date: endDate
         }
         
-        fetch('/reservations', {
+        fetch('https://meetingrooms.onrender.com/reservations', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

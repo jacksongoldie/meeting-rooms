@@ -16,7 +16,7 @@ function ReservationCard({ reservation, onDeleteReservation, onUpdateUser, onUpd
     const [confirmation, setConfirmation] = useState('')
 
     function handleDelete(){
-        fetch(`/reservations/${reservation.id}`, {
+        fetch(`https://meetingrooms.onrender.com/reservations/${reservation.id}`, {
             method: 'DELETE'
         })
         .then(onDeleteReservation(reservation))

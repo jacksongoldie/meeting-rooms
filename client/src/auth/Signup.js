@@ -40,7 +40,7 @@ function Signup({ accounts, onSetUser }) {
 
     function handleSubmit(e){
         e.preventDefault();
-        fetch('/signup', {
+        fetch('https://meetingrooms.onrender.com/signup', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

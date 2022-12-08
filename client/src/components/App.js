@@ -14,11 +14,11 @@ function App() {
   const [tabs, setTabs] = useState('/')
 
   useEffect (() => {
-    fetch('/accounts')
+    fetch('https://meetingrooms.onrender.com/accounts')
     .then(r => r.json())
     .then(setAccounts)
     
-    fetch('/me')
+    fetch('https://meetingrooms.onrender.com/me')
     .then(r => {
         if(r.ok){
             r.json()

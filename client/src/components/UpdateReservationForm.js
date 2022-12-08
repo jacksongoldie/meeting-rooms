@@ -19,7 +19,7 @@ function UpdateReservationForm({ reservation, onSetConfirmation, onUpdateUser, o
             start_date: startDate,
             end_date: endDate
         }
-        fetch(`/reservations/${id}`, {
+        fetch(`https://meetingrooms.onrender.com/reservations/${id}`, {
             method: "PATCH",
             headers: {
                 'Content-Type': 'application/json'
