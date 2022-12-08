@@ -1,6 +1,7 @@
 {
   "name": "react-rails-api-project-template-client",
   "version": "0.1.0",
+  "homepage": "https://meetingrooms.goldie-jackson.com",
   "private": true,
   "proxy": "http://meetingrooms.onrender.com",
   "engines": {
